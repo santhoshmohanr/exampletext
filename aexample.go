@@ -3,15 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("====================================")
-	a := []int{23, 45, 67, 89, 54, 34, 24, 68}
-	for i := 0; i < len(a); i++ {
-		for j := 0; j < len(a); j++ {
-			if a[i] > a[j] {
-				a[i], a[j] = a[j], a[i]
-			}
+	fmt.Println("main function")
+	chn := make(chan string)
+	go hello(chn)
+	fmt.Println(<-chn)
+	fmt.Println("last function")
 
-		}
-	}
-	fmt.Println(a)
+}
+func hello(chn chan string) {
+	fmt.Println("hello world")
+	chn <- "golang"
 }
